@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
+var family = [];
 
 port = 4040;
 
@@ -13,7 +15,7 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/family", (req, res) => {
-    const family = [
+    family = [
         {
             id : 1,
             name : "Alfredo 👨",
@@ -45,4 +47,17 @@ app.get("/family", (req, res) => {
 
 });
 
+app.post ("/family", (req, res) => {
+    const member = {
+        id : family.length + 1,
+        name : req.body.name,
+        age : req.body.age
+    };
+    family.push(member);
+    res.send(member);
+})
+
 //Test 2nd commit
+// Crea una ruta POST /family que cree un agregue un familiar
+// La idea es que despues de que llames el post, y luego llames GET en la lista salga el que creastes
+// Declarara var family at the top of the file just after imports (por fuera de la función)
